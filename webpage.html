@@ -1,0 +1,146 @@
+<!-- jshint browser: true, jquery: true, camelcase: true, indent: 2, undef: true, quotmark: single, maxlen: 80, trailing: true, curly: true, eqeqeq: true, forin: true, immed: true, latedef: true, newcap: true, nonew: true, unused: true, strict: true 
+
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Page</title>
+    <script src=
+    "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type=
+    "text/javascript">
+    </script>
+    <script src=
+    "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type=
+    "text/javascript">
+    </script>
+    <script type="text/javascript">
+            function Maxvalue(){
+
+                $.ajax({
+                        url:"http://localhost:3000/maxvalue",
+                        method:"GET",
+                        dataType: "json",
+                        contentType: "Application/Json",
+                        success:function(data){$('#lbl_id_max').text(data.max);},
+                        error:function(){
+                            alert("error");
+                        }
+                    });
+            }
+            
+            function Averagevalue(){
+                $.ajax({
+                        url:"http://localhost:3000/averagevalue",
+                        method:"GET",
+                        dataType: "json",
+                        contentType: "Application/Json",
+                        success:function(data){$('#lbl_id_avg').text(data.avg);},
+                        error:function(){
+                            alert("error");
+                        }
+                    });
+            }
+            
+            function getEvennumber(){
+                $.ajax({
+                        url:"http://localhost:3000/oneevenNumber",
+                        method:"GET",
+                        dataType: "json",
+                        contentType: "Application/Json",
+                        success:function(data){$('#lbl_id_even').text(data.result);},
+                        error:function(){
+                            alert("error");
+                        }
+                    });
+            }
+            function getallEvennumber(){
+                $.ajax({
+                        url:"http://localhost:3000/allevenNumber",
+                        method:"GET",
+                        dataType: "json",
+                        contentType: "Application/Json",
+                        success:function(data){$('#lbl_id_alleven').text(data.result1);},
+                        error:function(){
+                            alert("error");
+                        }
+                    });
+            }
+            
+            
+            function string_substring(){
+                var string_onetime = $("#match_string").val();              
+                    var param_string=string_onetime;
+                    $.ajax({
+                        url:"http://localhost:3000/find_substring/" + param_string,
+                        type: "POST",
+                        dataType: "json",
+                        contentType: "Application/Json",
+                        success: function(data) {
+                            console.log(data.result1);
+                            document.getElementById('lbl_string_once').innerHTML = data.result1;
+                        },
+                        failure: function(errMsg) {
+                            alert(errMsg);
+                        }
+            });
+            }
+            
+            
+            
+            
+            
+            function string_twice(){
+
+                var find_twice = $("#string_substring_twice").val();                
+                    var ip_value=find_twice;
+                    $.ajax({
+                        url:"http://localhost:3000/match_twice/" + ip_value,
+                        type: "POST",
+                        dataType: "json",
+                        contentType: "Application/Json",
+                        success: function(data) {
+                            console.log(data.result);
+                            
+                            document.getElementById('lbl_string_twice').innerHTML = data.result;
+                        },
+                        failure: function(errMsg) {
+                            alert(errMsg);
+                        }
+            });
+            }
+           
+    </script>
+</head>
+<body>
+    <form action="#" style="background-color:#E6E6FA">
+        <label>3,11,41,22,7</label> <input id="max" onclick="Maxvalue()" type=
+        "button" value="Max no"> <label id="lbl_id_max" style=
+        "color:blue"></label>
+        <hr>
+        <label>10,20,30,40,50</label> <input id="Average" onclick=
+        "Averagevalue()" type="button" value="Average no"> <label id=
+        "lbl_id_avg" style="color:blue"></label>
+        <hr>
+        <label>1,5,88,9,7</label> <input id="Evennumber" onclick=
+        "getEvennumber()" type="button" value="Atleast 1 Even"> <label id=
+        "lbl_id_even" style="color:blue"></label>
+        <hr>
+        <label>6,4,2,8,20</label> <input id="allEvennumber" onclick=
+        "getallEvennumber()" type="button" value="All Even"> <label id=
+        "lbl_id_alleven" style="color:blue"></label>
+        <hr>
+        <label>"ok","hi","hello","hey"</label><br>
+        String and Substring: <input id="match_string" name="match_string"
+        type="text"> <input id="matchonce" onclick="string_substring()" type=
+        "button" value="String Once"> <label id="lbl_string_once" style=
+        "color:blue"></label>
+        <hr>
+        <label>"ok","hi","hi","hello","bye","ok"</label><br>
+        String and Substring Twice: <input id="string_substring_twice" name=
+        "string_substring_twice" type="text"> <input id="match" onclick=
+        "string_twice()" type="button" value="String Twice"> <label id=
+        "lbl_string_twice" style="color:blue"></label>
+        <hr>
+    </form>
+</body>
+</html>
